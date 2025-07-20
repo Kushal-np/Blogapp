@@ -1,0 +1,53 @@
+[
+
+    {
+        "id": 1,
+        "name": "Random Book",
+        "title": "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
+        "price": 0,
+        "category": "Free",
+        "image": "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Mastering React",
+        "title": "Dive deep into modern React.js development with hooks and context",
+        "price": 15,
+        "category": "Free",
+        "image": "https://img.freepik.com/free-photo/stack-books-education-background_23-2147848464.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Poetry of the Mind",
+        "title": "A journey through thoughts and emotions expressed in verse",
+        "price": 0,
+        "category": "Free",
+        "image": "https://img.freepik.com/free-photo/book-with-green-nature-blurred-background_1150-17836.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Secrets of the Universe",
+        "title": "Explore the mysteries of space, time, and the cosmos",
+        "price": 25,
+        "category": "Free",
+        "image": "https://img.freepik.com/free-photo/open-book-night-sky_23-2147782370.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Cooking Simplified",
+        "title": "Quick and easy recipes for everyday cooking",
+        "price": 10,
+        "category": "Free",
+        "image": "https://img.freepik.com/free-photo/top-view-cookbook-surrounded-by-food_23-2147685019.jpg"
+    },
+    {
+        "id": 6,
+        "name": "The Art of Calm",
+        "title": "Mindfulness and meditation techniques for inner peace",
+        "price": 0,
+        "category": "Free",
+        "image": "https://img.freepik.com/free-photo/meditation-concept-still-life_23-2148991999.jpg"
+    }
+
+
+]

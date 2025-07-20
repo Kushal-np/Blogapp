@@ -124,7 +124,7 @@ function Navbar() {
 
         {/* CTA Button */}
         <button className="btn btn-primary btn-sm hidden sm:inline-block">
-          Sign Up
+          Sign in
         </button>
       </div>
     </div>
