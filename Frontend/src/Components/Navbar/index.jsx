@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Login from "../Login";
 function Navbar() {
-
+  const [isLoginShow , SetLoginShown] = useState(false)
   const [theme,setTheme] = useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
   const element = document.documentElement;
   useEffect(()=>{
@@ -24,6 +25,9 @@ function Navbar() {
       console.log("Searching for:", searchQuery);
     }
   };
+  function LoginHandler(){
+    SetLoginShown(!isLoginShow)
+  }
 
   const navItems = (
     <>
@@ -126,8 +130,10 @@ function Navbar() {
         
 
         {/* CTA Button */}
-        <button className="btn btn-primary btn-sm hidden sm:inline-block">
-          Sign in
+        <button className="btn btn-primary btn-sm hidden sm:inline-block " onClick={LoginHandler}>
+
+        <Link to="/login">Sign in</Link>
+
         </button>
       </div>
     </div>

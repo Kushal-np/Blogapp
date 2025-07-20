@@ -12,7 +12,6 @@ function Home(){
       <Navbar />
       <div className='flex flex-col'>
       <Banner />
-      <EmailField/>
       </div>
       <Heading />
       <FreeBook/>

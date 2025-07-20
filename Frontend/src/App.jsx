@@ -8,6 +8,7 @@ import Heading from './Components/Heading'
 import Home from './Pages/Home'
 import {Routes , Route} from 'react-router-dom'
 import Courses from './Pages/Courses'
+import Login from './Components/Login'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/books" element={<Courses />} />
+        <Route path='/login' element={<Login />}/>
       </Routes>
     </div>
   )
