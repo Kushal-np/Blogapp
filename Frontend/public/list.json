@@ -1,53 +1,210 @@
 [
-
-    {
-        "id": 1,
-        "name": "Random Book",
-        "title": "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
-        "price": 0,
-        "category": "Free",
-        "image": "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg"
-    },
-    {
-        "id": 2,
-        "name": "Mastering React",
-        "title": "Dive deep into modern React.js development with hooks and context",
-        "price": 15,
-        "category": "Free",
-        "image": "https://img.freepik.com/free-photo/stack-books-education-background_23-2147848464.jpg"
-    },
-    {
-        "id": 3,
-        "name": "Poetry of the Mind",
-        "title": "A journey through thoughts and emotions expressed in verse",
-        "price": 0,
-        "category": "Free",
-        "image": "https://img.freepik.com/free-photo/book-with-green-nature-blurred-background_1150-17836.jpg"
-    },
-    {
-        "id": 4,
-        "name": "Secrets of the Universe",
-        "title": "Explore the mysteries of space, time, and the cosmos",
-        "price": 25,
-        "category": "Free",
-        "image": "https://img.freepik.com/free-photo/open-book-night-sky_23-2147782370.jpg"
-    },
-    {
-        "id": 5,
-        "name": "Cooking Simplified",
-        "title": "Quick and easy recipes for everyday cooking",
-        "price": 10,
-        "category": "Free",
-        "image": "https://img.freepik.com/free-photo/top-view-cookbook-surrounded-by-food_23-2147685019.jpg"
-    },
-    {
-        "id": 6,
-        "name": "The Art of Calm",
-        "title": "Mindfulness and meditation techniques for inner peace",
-        "price": 0,
-        "category": "Free",
-        "image": "https://img.freepik.com/free-photo/meditation-concept-still-life_23-2148991999.jpg"
-    }
-
-
+  {
+    "id": 1,
+    "name": "Random Book",
+    "title": "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Mastering React",
+    "title": "Dive deep into modern React.js development with hooks and context",
+    "price": 15,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/stack-books-education-background_23-2147848464.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Poetry of the Mind",
+    "title": "A journey through thoughts and emotions expressed in verse",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-photo/book-with-green-nature-blurred-background_1150-17836.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Secrets of the Universe",
+    "title": "Explore the mysteries of space, time, and the cosmos",
+    "price": 25,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-photo/open-book-night-sky_23-2147782370.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Cooking Simplified",
+    "title": "Quick and easy recipes for everyday cooking",
+    "price": 10,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-photo/top-view-cookbook-surrounded-by-food_23-2147685019.jpg"
+  },
+  {
+    "id": 6,
+    "name": "The Art of Calm",
+    "title": "Mindfulness and meditation techniques for inner peace",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-photo/meditation-concept-still-life_23-2148991999.jpg"
+  },
+  {
+    "id": 7,
+    "name": "JavaScript Essentials",
+    "title": "Master the core concepts of modern JavaScript programming",
+    "price": 20,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/flat-lay-programming-book_23-2148751262.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Startup Strategy",
+    "title": "A practical guide to launching your own business",
+    "price": 30,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/book-business-planning_23-2148723140.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Photography for Beginners",
+    "title": "Learn the art and science of stunning photography",
+    "price": 18,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/photographer-working-studio_23-2148772335.jpg"
+  },
+  {
+    "id": 10,
+    "name": "The Code Architect",
+    "title": "Building scalable applications with clean architecture",
+    "price": 28,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/developer-reading-code-book_23-2148741156.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Design Thinking",
+    "title": "Unlocking creativity in product and UX design",
+    "price": 22,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/ux-ui-design-book-desk_23-2148790012.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Finance Made Simple",
+    "title": "Everything you need to manage personal finances smartly",
+    "price": 16,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/finance-management-book-cover_23-2148789345.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Art of Negotiation",
+    "title": "Persuasion tactics used by the world’s top dealmakers",
+    "price": 26,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/businessmen-reading-negotiation-book_23-2148840030.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Learn TypeScript",
+    "title": "Enhance your JS skills with TypeScript",
+    "price": 19,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/developer-learning-typescript-book_23-2148792231.jpg"
+  },
+  {
+    "id": 15,
+    "name": "AI for Everyone",
+    "title": "Understand how AI is changing the world",
+    "price": 35,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/ai-book-artificial-intelligence-concept_23-2149302384.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Healthy Habits",
+    "title": "Daily routines for a better life",
+    "price": 12,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/book-diet-health-concept_23-2148794445.jpg"
+  },
+  {
+    "id": 17,
+    "name": "The Power of Sleep",
+    "title": "Science-backed methods for improving sleep quality",
+    "price": 17,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/sleep-wellness-book-cover_23-2148993287.jpg"
+  },
+  {
+    "id": 18,
+    "name": "SQL Mastery",
+    "title": "Write efficient and powerful database queries",
+    "price": 21,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/sql-book-abstract-database_23-2149112250.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Writing that Works",
+    "title": "Effective writing techniques for every profession",
+    "price": 13,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/pen-on-writing-book_23-2148765332.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Leadership 101",
+    "title": "Fundamentals of becoming an inspiring leader",
+    "price": 24,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/leadership-guidebook-desk_23-2148783221.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Crypto Unlocked",
+    "title": "Understanding blockchain and cryptocurrency",
+    "price": 29,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/bitcoin-blockchain-book_23-2149112239.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Build Your Brand",
+    "title": "Personal branding for entrepreneurs and creatives",
+    "price": 14,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/branding-strategy-book_23-2148793012.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Digital Detox",
+    "title": "Reclaiming your time in the modern world",
+    "price": 11,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/digital-detox-book-cover_23-2148731111.jpg"
+  },
+  {
+    "id": 24,
+    "name": "Master Figma",
+    "title": "The complete guide to interface design with Figma",
+    "price": 23,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/figma-design-guide_23-2149012231.jpg"
+  },
+  {
+    "id": 25,
+    "name": "Speak with Impact",
+    "title": "Improve public speaking and communication",
+    "price": 27,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/public-speaking-book_23-2148993290.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Python for Data Science",
+    "title": "Analyze and visualize data with Python",
+    "price": 32,
+    "category": "Price",
+    "image": "https://img.freepik.com/free-photo/python-book-data-science_23-2149200001.jpg"
+  }
 ]

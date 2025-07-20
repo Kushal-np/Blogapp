@@ -11,7 +11,7 @@ function FreeBook(){
             <div className="slider-container">
         <div className="flex flex-wrap lg:grid lg:grid-cols-3 lg:grid-rows-2">
         {
-            list.map((listItem)=>{
+            filterData.map((listItem)=>{
                 return(
                     <Card key={listItem.id} name={listItem.name} title={listItem.title} price={listItem.price} category={listItem.category} image={listItem.image} />
                 )

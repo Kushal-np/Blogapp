@@ -1,6 +1,21 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 function Navbar() {
+
+  const [theme,setTheme] = useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
+  const element = document.documentElement;
+  useEffect(()=>{
+    if(theme==="dark"){
+      element.classList.add("darkTheme");
+      localStorage.setItem("theme","dark")
+      document.body.classList.add("dark")
+    }
+    else{
+      element.classList.remove("dark");
+      localStorage.setItem("theme" , "light")
+      document.body.classList.remove("dark")
+    }
+  })
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -12,8 +27,12 @@ function Navbar() {
 
   const navItems = (
     <>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#books">Books</a></li>
+      <li>
+        <Link to="/" >Home</Link>
+      </li>
+      <li>
+        <Link to="/books">Books</Link>
+      </li> 
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </>
@@ -104,23 +123,7 @@ function Navbar() {
         </div>
 
         {/* Theme Dropdown */}
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle btn-sm hover:bg-base-200"
-          >
-            🌗
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40 border border-base-300"
-          >
-            <li><a data-theme="light">☀️ Light</a></li>
-            <li><a data-theme="dark">🌙 Dark</a></li>
-            <li><a data-theme="system">🖥️ System</a></li>
-          </ul>
-        </div>
+        
 
         {/* CTA Button */}
         <button className="btn btn-primary btn-sm hidden sm:inline-block">
