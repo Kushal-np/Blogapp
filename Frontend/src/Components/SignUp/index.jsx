@@ -1,16 +1,30 @@
+import AuthNavbar from "../AuthNavbar";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 
 function Signup() {
     return (
         <div>
-            <Navbar />
+            <AuthNavbar/>
             <div className="min-h-screen flex justify-center items-center">
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <div className="card-body">
                         <h2 className="card-title text-center mb-4">Sign Up</h2>
                         <form onSubmit="/">
                             <div className="form-control">
+                                <label className="label" htmlFor="username">
+                                    <span className="label-text">Username</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="username" 
+                                    id="username"
+                                    placeholder="Enter your username here" 
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                            </div>
+                            <div className="form-control mt-4">
                                 <label className="label" htmlFor="email">
                                     <span className="label-text">Email</span>
                                 </label>

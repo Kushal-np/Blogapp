@@ -9,6 +9,7 @@ import Home from './Pages/Home'
 import {Routes , Route} from 'react-router-dom'
 import Courses from './Pages/Courses'
 import Login from './Components/Login'
+import Signup from './Components/SignUp'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Home/>}/>
         <Route path="/books" element={<Courses />} />
         <Route path='/login' element={<Login />}/>
+        <Route path='/signup' element={<Signup />}/>
       </Routes>
     </div>
   )

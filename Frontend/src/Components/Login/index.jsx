@@ -1,10 +1,11 @@
+import AuthNavbar from "../AuthNavbar";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 
 function Login() {
     return (
         <div>
-            <Navbar />
+            <AuthNavbar />
             <div className="min-h-screen flex justify-center items-center">
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <div className="card-body">
