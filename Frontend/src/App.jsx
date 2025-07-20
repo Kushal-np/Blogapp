@@ -10,6 +10,7 @@ import {Routes , Route} from 'react-router-dom'
 import Courses from './Pages/Courses'
 import Login from './Components/Login'
 import Signup from './Components/SignUp'
+import AboutPage from './Pages/About'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/books" element={<Courses />} />
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<Signup />}/>
+        <Route path='/about' element={<AboutPage />}/>
       </Routes>
     </div>
   )

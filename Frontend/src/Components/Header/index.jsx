@@ -36,9 +36,7 @@ function Header() {
       </div>
       
       {/* Floating Elements */}
-      <div className="absolute top-20 left-10 text-6xl opacity-10 animate-pulse">📖</div>
-      <div className="absolute bottom-20 right-10 text-4xl opacity-10 animate-bounce">✨</div>
-      <div className="absolute top-1/2 right-20 text-5xl opacity-10 animate-pulse delay-700">🔖</div>
+      
     </div>
   );
 }

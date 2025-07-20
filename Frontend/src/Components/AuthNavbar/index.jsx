@@ -37,8 +37,8 @@ function AuthNavbar() {
       <li>
         <Link to="/books">Books</Link>
       </li> 
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><Link to="/about">About</Link></li>
+      
     </>
   );
 
