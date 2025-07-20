@@ -72,7 +72,7 @@ function Login() {
                             </div>
                             <div className="form-control mt-6">
                                 <button type="submit" className="btn btn-primary">
-                                    Sign In
+                                    <Link to="/">Sign in</Link>
                                 </button>
                             </div>
                         </form>

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "../Login";
 import { useAuth } from "../../context/AuthProvider";
+import Logout from "../Logout";
 function Navbar() {
   const [authUser , setAuthUser] = useAuth()
   console.log(authUser)
+
   const [isLoginShow , SetLoginShown] = useState(false)
   const [theme,setTheme] = useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
   const element = document.documentElement;
@@ -128,15 +130,17 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Theme Dropdown */}
-        
-
-        {/* CTA Button */}
-        <button className="btn btn-primary btn-sm hidden sm:inline-block " onClick={LoginHandler}>
+        {
+          authUser? <Logout />:(      <button className="btn btn-primary btn-sm hidden sm:inline-block " onClick={LoginHandler}>
 
         <Link to="/login">Sign in</Link>
 
-        </button>
+        </button>)
+        }
+        
+
+        
+
       </div>
     </div>
   );
