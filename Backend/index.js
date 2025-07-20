@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import bookRoutes from "./routes/book.route.js"
+import cors from 'cors'
 // Load environment variables
 dotenv.config();
 
@@ -10,7 +11,7 @@ const app = express();
 
 // Middleware (for parsing JSON)
 app.use(express.json());
-
+app.use(cors())
 // Connect to database
 connectDB();
 

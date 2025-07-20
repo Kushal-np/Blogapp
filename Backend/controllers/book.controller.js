@@ -20,7 +20,6 @@ export const getBook = async(req , res) => {
 export const AddBook = async(req,res) =>{
     try{
         const {name,price,category,image,title} = req.body;
-        await Book.create({name,price,category,image,title});
         const newBook = await Book.create({name,price,category,image,title});
         res.status(200).json({
             success:true,
