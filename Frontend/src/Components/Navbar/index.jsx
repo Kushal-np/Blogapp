@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "../Login";
+import { useAuth } from "../../context/AuthProvider";
 function Navbar() {
+  const [authUser , setAuthUser] = useAuth()
+  console.log(authUser)
   const [isLoginShow , SetLoginShown] = useState(false)
   const [theme,setTheme] = useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
   const element = document.documentElement;
