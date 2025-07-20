@@ -13,4 +13,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = { connectDB }; // ← This must be an object with connectDB
+export default connectDB;
