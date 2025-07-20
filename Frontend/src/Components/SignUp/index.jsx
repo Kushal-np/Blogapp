@@ -1,8 +1,15 @@
+import { useState } from "react";
 import AuthNavbar from "../AuthNavbar";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 
 function Signup() {
+    const [username,setUsername] =useState("")
+    const [email,setEmail] =useState("")
+    const [password,setPassword] =useState("")
+    function handleForm(e){
+        e.preventDefault()
+    }
     return (
         <div>
             <AuthNavbar/>
@@ -10,7 +17,7 @@ function Signup() {
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <div className="card-body">
                         <h2 className="card-title text-center mb-4">Sign Up</h2>
-                        <form onSubmit="/">
+                        <form onSubmit={handleForm}>
                             <div className="form-control">
                                 <label className="label" htmlFor="username">
                                     <span className="label-text">Username</span>
@@ -22,6 +29,7 @@ function Signup() {
                                     placeholder="Enter your username here" 
                                     className="input input-bordered w-full"
                                     required
+                                    onChange={(e)=>(setUsername(e.target.value))}
                                 />
                             </div>
                             <div className="form-control mt-4">
@@ -35,6 +43,7 @@ function Signup() {
                                     placeholder="Enter your email here" 
                                     className="input input-bordered w-full"
                                     required
+                                    onChange={(e)=>{setEmail(e.target.value)}}
                                 />
                             </div>
                             <div className="form-control mt-4">
@@ -48,6 +57,7 @@ function Signup() {
                                     placeholder="Enter your password" 
                                     className="input input-bordered w-full"
                                     required
+                                    onChange={(e)=>{setPassword(e.target.value)}}
                                 />
                             </div>
                             <div className="form-control mt-6">

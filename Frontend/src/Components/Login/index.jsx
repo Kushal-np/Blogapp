@@ -1,8 +1,16 @@
+import { useState } from "react";
 import AuthNavbar from "../AuthNavbar";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 
 function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleLogin(e) {
+        e.preventDefault();
+    }
+
     return (
         <div>
             <AuthNavbar />
@@ -10,7 +18,7 @@ function Login() {
                 <div className="card w-96 bg-base-100 shadow-xl">
                     <div className="card-body">
                         <h2 className="card-title text-center mb-4">Sign In</h2>
-                        <form onSubmit="/">
+                        <form onSubmit={handleLogin}>
                             <div className="form-control">
                                 <label className="label" htmlFor="email">
                                     <span className="label-text">Email</span>
@@ -22,6 +30,7 @@ function Login() {
                                     placeholder="Enter your email here" 
                                     className="input input-bordered w-full"
                                     required
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div className="form-control mt-4">
@@ -35,6 +44,7 @@ function Login() {
                                     placeholder="Enter your password" 
                                     className="input input-bordered w-full"
                                     required
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                             <div className="form-control mt-6">
