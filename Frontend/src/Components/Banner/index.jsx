@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Banner() {
   return (
     <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 flex flex-col md:flex-row items-center py-16 gap-10">
@@ -12,8 +14,8 @@ function Banner() {
           Find curated collections, bestsellers, new releases, and hidden gems across every genre. Dive into the world of stories that inspire, educate, and entertain.
         </p>
         <div className="flex gap-4">
-          <button className="btn btn-primary">Browse Books</button>
-          <button className="btn btn-outline">Learn More</button>
+          <button className="btn btn-primary"><Link to="/books">Browse Books</Link></button>
+          <button className="btn btn-outline"><Link to="/about">Learn More</Link></button>
         </div>
       </div>
 
