@@ -28,7 +28,7 @@ function Courses() {
       <AddBooks />
 
       {/* Cards container wrapper for max width and center */}
-      <div className="bg-black py-12">
+      {/* <div className="bg-black py-12">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="flex flex-wrap gap-8 justify-center lg:grid lg:grid-cols-3 lg:grid-rows-auto">
             {book.map((listItem) => (
@@ -43,7 +43,7 @@ function Courses() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <Footer />
     </div>
