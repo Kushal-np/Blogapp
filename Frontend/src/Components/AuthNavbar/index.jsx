@@ -55,30 +55,7 @@ function AuthNavbar() {
         <div className="flex justify-between items-center">
           {/* Left: Logo + Hamburger */}
           <div className="flex items-center gap-4">
-            {/* Mobile Menu */}
-            <div className="dropdown lg:hidden">
-              <label
-                tabIndex={0}
-                className="btn btn-ghost cursor-pointer p-2 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/20 hover:bg-white/10 hover:scale-110 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-white/20"
-              >
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </label>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu absolute mt-4 w-56 bg-black/95 backdrop-blur-xl rounded-3xl p-6 space-y-4 shadow-2xl shadow-black/50 border border-white/20 z-[100]"
-              >
-                {navItems}
-              </ul>
-            </div>
-
+            
             {/* Logo */}
             <Link
               to="/"
