@@ -1,13 +1,14 @@
 import { useState } from "react";
 import AuthNavbar from "../AuthNavbar";
 import Navbar from "../Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Add useNavigate hook
 
     function handleForm(e) {
         e.preventDefault();
@@ -22,10 +23,12 @@ function Login() {
         })
         .then((res) => {
             if (res.data.success) {
-                toast.success("Signed in successfully")
+                toast.success("Signed in successfully");
                 localStorage.setItem("Users", JSON.stringify(res.data.user));
+                // Navigate to home page after successful login
+                navigate("/");
             } else {
-                alert("Login failed!");
+                toast.error("Login failed!");
             }
         })
         .catch((error) => {
@@ -53,6 +56,7 @@ function Login() {
                                     placeholder="Enter your email here" 
                                     className="input input-bordered w-full"
                                     required
+                                    value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
@@ -67,12 +71,13 @@ function Login() {
                                     placeholder="Enter your password" 
                                     className="input input-bordered w-full"
                                     required
+                                    value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                             <div className="form-control mt-6">
                                 <button type="submit" className="btn btn-primary">
-                                    <Link to="/">Sign in</Link>
+                                    Sign in
                                 </button>
                             </div>
                         </form>

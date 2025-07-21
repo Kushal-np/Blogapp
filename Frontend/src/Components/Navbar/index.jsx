@@ -1,114 +1,93 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Login from "../Login";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import Logout from "../Logout";
+
 function Navbar() {
-  const [authUser , setAuthUser] = useAuth()
-  console.log(authUser)
-
-  const [isLoginShow , SetLoginShown] = useState(false)
-  const [theme,setTheme] = useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light")
-  const element = document.documentElement;
-  useEffect(()=>{
-    if(theme==="dark"){
-      element.classList.add("darkTheme");
-      localStorage.setItem("theme","dark")
-      document.body.classList.add("dark")
-    }
-    else{
-      element.classList.remove("dark");
-      localStorage.setItem("theme" , "light")
-      document.body.classList.remove("dark")
-    }
-  })
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [authUser] = useAuth();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
+  // Theme toggle logic
+  useEffect(() => {
+    const element = document.documentElement;
+
+    if (theme === "dark") {
+      element.classList.add("darkTheme");
+      localStorage.setItem("theme", "dark");
+      document.body.classList.add("dark");
+    } else {
+      element.classList.remove("darkTheme");
+      localStorage.setItem("theme", "light");
+      document.body.classList.remove("dark");
+    }
+  }, [theme]);
+
+  // Search handler
   const handleSearch = () => {
     if (searchQuery.trim()) {
       console.log("Searching for:", searchQuery);
+      // Optionally navigate to a search results page
+      // navigate(`/search?q=${searchQuery}`);
     }
   };
-  function LoginHandler(){
-    SetLoginShown(!isLoginShow)
-  }
 
+  // Navigation items
   const navItems = (
     <>
-      <li>
-        <Link to="/" >Home</Link>
-      </li>
-      <li>
-        <Link to="/books">Books</Link>
-      </li> 
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/books">Books</Link></li>
       <li><Link to="/about">About</Link></li>
     </>
   );
 
   return (
     <div className="navbar bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-sm px-4 sm:px-6 lg:px-8">
-      {/* Left: Logo & Mobile Menu */}
+      
+      {/* Left: Logo and Mobile Menu */}
       <div className="navbar-start">
-        {/* Mobile Hamburger */}
+        {/* Mobile Hamburger Menu */}
         <div className="dropdown dropdown-bottom lg:hidden">
-  <label tabIndex={0} className="btn btn-ghost btn-circle">
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M4 6h16M4 12h16M4 18h16"
-      ></path>
-    </svg>
-  </label>
-  <ul
-    tabIndex={0}
-    className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow-xl bg-base-100 rounded-box w-56 border border-base-300"
-  >
-    {navItems}
-    <li>
-      <div className="form-control mt-2">
-        <div className="input-group input-group-sm">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="input input-bordered input-sm w-full"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          />
-          <button
-            className="btn btn-sm btn-primary"
-            onClick={handleSearch}
-          >
-            🔍
-          </button>
+          <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </label>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow-xl bg-base-100 rounded-box w-56 border border-base-300">
+            {navItems}
+            <li>
+              <div className="form-control mt-2">
+                <div className="input-group input-group-sm">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="input input-bordered input-sm w-full"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  />
+                  <button className="btn btn-sm btn-primary" onClick={handleSearch}>
+                    🔍
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
-      </div>
-    </li>
-  </ul>
-</div>
-
 
         {/* Logo */}
-        <a className="btn btn-ghost text-xl font-bold text-primary">
+        <Link to="/" className="btn btn-ghost text-xl font-bold text-primary">
           📚 Bookish
-        </a>
+        </Link>
       </div>
 
-      {/* Center: Desktop Menu */}
+      {/* Center: Navigation items (for desktop) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-1">{navItems}</ul>
       </div>
 
-      {/* Right: Search, Theme, Button */}
+      {/* Right: Search + Theme + Login/Logout */}
       <div className="navbar-end flex items-center gap-2">
         {/* Desktop Search */}
         <div className="hidden md:flex">
@@ -121,26 +100,20 @@ function Navbar() {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <button
-              className="btn btn-sm btn-primary"
-              onClick={handleSearch}
-            >
+            <button className="btn btn-sm btn-primary" onClick={handleSearch}>
               🔍
             </button>
           </div>
         </div>
 
-        {
-          authUser? <Logout />:(      <button className="btn btn-primary btn-sm hidden sm:inline-block " onClick={LoginHandler}>
-
-        <Link to="/login">Sign in</Link>
-
-        </button>)
-        }
-        
-
-        
-
+        {/* Login / Logout */}
+        {authUser ? (
+          <Logout />
+        ) : (
+          <Link to="/login" className="btn btn-primary btn-sm hidden sm:inline-block">
+            Sign in
+          </Link>
+        )}
       </div>
     </div>
   );

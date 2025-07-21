@@ -1,14 +1,15 @@
 import { useState } from "react";
 import AuthNavbar from "../AuthNavbar";
 import Navbar from "../Navbar";
-import { Link } from "react-router-dom";
-import axios from "axios"; // ✅ IMPORT ADDED
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 function Signup() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate(); // Add useNavigate hook
 
     function handleForm(e) {
         e.preventDefault();
@@ -25,13 +26,15 @@ function Signup() {
         .then((res) => {
             console.log(res.data);
             if(res.data){
-                toast.success("Signed up successfully")
+                toast.success("Signed up successfully");
+                localStorage.setItem("Users", JSON.stringify(res.data));
+                // Navigate to login page after successful signup
+                navigate("/login");
             }
-            localStorage.setItem("Users",JSON.stringify(res.data))
         })
         .catch((error) => {
             console.error("❌ Registration error:", error.response?.data || error.message);
-            toast.error("error while registering")
+            toast.error("Error while registering: " + (error.response?.data?.message || "Unknown error"));
         });
     }
 
@@ -54,6 +57,7 @@ function Signup() {
                                     placeholder="Enter your username here" 
                                     className="input input-bordered w-full"
                                     required
+                                    value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
@@ -68,6 +72,7 @@ function Signup() {
                                     placeholder="Enter your email here" 
                                     className="input input-bordered w-full"
                                     required
+                                    value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
@@ -82,12 +87,13 @@ function Signup() {
                                     placeholder="Enter your password" 
                                     className="input input-bordered w-full"
                                     required
+                                    value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                             <div className="form-control mt-6">
                                 <button type="submit" className="btn btn-primary">
-                                    <Link to="/login">Sign up</Link>
+                                    Sign up
                                 </button>
                             </div>
                         </form>
