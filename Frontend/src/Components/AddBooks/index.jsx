@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function AddBooks() {
+function AddBooks({ onBookAdded }) {
   const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,13 +12,12 @@ function AddBooks() {
     image: "",
     title: "",
   });
-  const [books, setBooks] = useState([]);
-  const [loadingBooks, setLoadingBooks] = useState(false);
 
   const categories = [
     "Fiction", "Non-Fiction", "Mystery", "Romance", "Science Fiction",
     "Fantasy", "Biography", "History", "Self-Help", "Business",
-    "Philosophy", "Poetry", "Drama", "Adventure", "Thriller","Information Technology" , "Free"
+    "Philosophy", "Poetry", "Drama", "Adventure", "Thriller",
+    "Information Technology", "Free"
   ];
 
   function formHandler() {
@@ -40,27 +39,6 @@ function AddBooks() {
       [field]: value
     }));
   }
-
-  // Fetch books from backend
-  async function fetchBooks() {
-    setLoadingBooks(true);
-    try {
-      const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBook", {
-        withCredentials: true,
-      });
-      setBooks(res.data.book);
-    } catch (error) {
-      toast.error("Failed to load books");
-      console.error(error.response?.data || error.message);
-    } finally {
-      setLoadingBooks(false);
-    }
-  }
-
-  // Fetch books on component mount
-  useEffect(() => {
-    fetchBooks();
-  }, []);
 
   async function handler(e) {
     e.preventDefault();
@@ -84,8 +62,10 @@ function AddBooks() {
       });
       setShowForm(false);
 
-      // Fetch updated list after adding a new book
-      fetchBooks();
+      // Call parent to refresh book list immediately
+      if (onBookAdded) {
+        onBookAdded();
+      }
 
     } catch (error) {
       toast.error("Error while adding the book");
@@ -101,7 +81,6 @@ function AddBooks() {
         {!showForm ? (
           <div className="text-center max-w-xl mx-auto space-y-8">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border-2 border-white mb-6">
-              {/* Add icon SVG */}
               <svg
                 className="w-10 h-10 stroke-white"
                 fill="none"
@@ -137,16 +116,8 @@ function AddBooks() {
               </svg>
               Add New Book
             </button>
-
-            {/* Books List */}
-            <div className="mt-12 text-left">
-              <h2 className="text-2xl font-semibold mb-4">Available Books</h2>
-
-              
-            </div>
           </div>
         ) : (
-          // Your existing add book form here
           <div className="max-w-xl mx-auto">
             <button
               onClick={formHandler}
@@ -168,8 +139,6 @@ function AddBooks() {
             </p>
 
             <form onSubmit={handler} className="space-y-6">
-              {/* Your existing form inputs */}
-              {/* Title */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="title" className="block text-sm font-semibold mb-1">
@@ -202,7 +171,6 @@ function AddBooks() {
                 </div>
               </div>
 
-              {/* Category and Price */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="category" className="block text-sm font-semibold mb-1">
@@ -247,7 +215,6 @@ function AddBooks() {
                 </div>
               </div>
 
-              {/* Image */}
               <div>
                 <label htmlFor="image" className="block text-sm font-semibold mb-1">
                   Book Cover Image URL <span className="text-gray-500 text-xs">(Optional)</span>
@@ -265,7 +232,6 @@ function AddBooks() {
                 </p>
               </div>
 
-              {/* Preview */}
               {(formData.title || formData.name || formData.image) && (
                 <>
                   <hr className="my-6 border-white/20" />
@@ -322,7 +288,6 @@ function AddBooks() {
                 </>
               )}
 
-              {/* Buttons */}
               <div className="flex justify-end gap-4 mt-8">
                 <button
                   type="button"
