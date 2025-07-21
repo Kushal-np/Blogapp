@@ -48,7 +48,6 @@ function AddBooks() {
       const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBook", {
         withCredentials: true,
       });
-      console.log("Book added to the database")
       setBooks(res.data);
     } catch (error) {
       toast.error("Failed to load books");
