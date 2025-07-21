@@ -142,38 +142,7 @@ function AddBooks() {
             <div className="mt-12 text-left">
               <h2 className="text-2xl font-semibold mb-4">Available Books</h2>
 
-              {loadingBooks ? (
-                <p>Loading books...</p>
-              ) : books.length === 0 ? (
-                <p>No books available yet.</p>
-              ) : (
-                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {books.map((book) => (
-                    <li
-                      key={book._id || book.id}
-                      className="border border-white/30 rounded-lg p-4 bg-gray-900"
-                    >
-                      {book.image ? (
-                        <img
-                          src={book.image}
-                          alt={`${book.title} cover`}
-                          className="w-full h-48 object-contain mb-4"
-                        />
-                      ) : (
-                        <div className="w-full h-48 flex items-center justify-center bg-gray-700 text-gray-400 mb-4">
-                          No Image
-                        </div>
-                      )}
-                      <h3 className="text-lg font-bold truncate">{book.title}</h3>
-                      <p className="text-gray-400 mb-2 truncate">by {book.name}</p>
-                      <p className="text-sm">
-                        Category: <span className="italic">{book.category}</span>
-                      </p>
-                      <p className="text-sm font-semibold mt-1">${book.price}</p>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              
             </div>
           </div>
         ) : (
