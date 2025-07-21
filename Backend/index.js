@@ -5,6 +5,7 @@ import bookRoutes from "./routes/book.route.js"
 import authRoutes from './routes/user.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+
 // Load environment variables
 dotenv.config();
 
@@ -18,12 +19,13 @@ app.use(cors({
   origin: 'http://localhost:5173',   
   credentials: true                  
 }));
+
 // Connect to database
 connectDB();
 
 // Basic route
-app.use("/api/v1/book" , bookRoutes)
 app.use("/api/v1/auth/" , authRoutes)
+app.use("/api/v1/book" , bookRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 5000;

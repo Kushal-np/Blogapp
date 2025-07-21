@@ -15,8 +15,8 @@ function Home(){
       <Banner />
       </div>
       <Heading />
-      <FreeBook/>
-      <AddBooks />
+      <FreeBook className="min-h-[15vh]"/>
+     
       <Footer/>
       
     </div>

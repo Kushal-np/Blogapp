@@ -15,20 +15,30 @@ import { Toaster } from 'react-hot-toast'
 import { useAuth } from './context/AuthProvider'
 
 const App = () => {
-    const [authUser , setAuthUser] = useAuth()
+    const [authUser, setAuthUser, isLoading] = useAuth()
     console.log(authUser)
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/books" element={authUser?<Courses />:<Navigate to="/signup" />} />
-        <Route path='/login' element={<Login />}/>
-        <Route path='/signup' element={<Signup />}/>
-        <Route path='/about' element={<AboutPage />}/>
-      </Routes>
-      <Toaster />
-    </div>
-  )
+    
+    // Show loading while checking authentication
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="text-xl">Loading...</div>
+            </div>
+        )
+    }
+    
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/books" element={authUser ? <Courses /> : <Navigate to="/signup" />} />
+                <Route path='/login' element={<Login />}/>
+                <Route path='/signup' element={<Signup />}/>
+                <Route path='/about' element={<AboutPage />}/>
+            </Routes>
+            <Toaster />
+        </div>
+    )
 }
 
 export default App;

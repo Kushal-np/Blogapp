@@ -1,18 +1,21 @@
 import { useState } from "react";
 import AuthNavbar from "../AuthNavbar";
-import Navbar from "../Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthProvider"; // Import useAuth
 
 function Signup() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate(); // Add useNavigate hook
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const [authUser, setAuthUser] = useAuth(); // Get auth context
 
     function handleForm(e) {
         e.preventDefault();
+        setIsLoading(true);
 
         const userInfo = {
             username,
@@ -25,16 +28,28 @@ function Signup() {
         })
         .then((res) => {
             console.log(res.data);
-            if(res.data){
+            if(res.data && res.data.success) {
                 toast.success("Signed up successfully");
-                localStorage.setItem("Users", JSON.stringify(res.data));
-                // Navigate to login page after successful signup
-                navigate("/login");
+                
+                // If the API returns user data after signup, you can auto-login
+                // Otherwise, just navigate to login
+                if(res.data.user) {
+                    // Auto-login after successful signup
+                    localStorage.setItem("Users", JSON.stringify(res.data.user));
+                    setAuthUser(res.data.user);
+                    navigate("/books");
+                } else {
+                    // Navigate to login page after successful signup
+                    navigate("/login");
+                }
             }
         })
         .catch((error) => {
             console.error("❌ Registration error:", error.response?.data || error.message);
             toast.error("Error while registering: " + (error.response?.data?.message || "Unknown error"));
+        })
+        .finally(() => {
+            setIsLoading(false);
         });
     }
 
@@ -59,6 +74,7 @@ function Signup() {
                                     required
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
+                                    disabled={isLoading}
                                 />
                             </div>
                             <div className="form-control mt-4">
@@ -74,6 +90,7 @@ function Signup() {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    disabled={isLoading}
                                 />
                             </div>
                             <div className="form-control mt-4">
@@ -89,11 +106,16 @@ function Signup() {
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    disabled={isLoading}
                                 />
                             </div>
                             <div className="form-control mt-6">
-                                <button type="submit" className="btn btn-primary">
-                                    Sign up
+                                <button 
+                                    type="submit" 
+                                    className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Signing up...' : 'Sign up'}
                                 </button>
                             </div>
                         </form>

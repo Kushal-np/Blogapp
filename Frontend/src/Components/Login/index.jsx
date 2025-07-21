@@ -1,17 +1,20 @@
 import { useState } from "react";
 import AuthNavbar from "../AuthNavbar";
-import Navbar from "../Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthProvider"; // Import useAuth
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Add useNavigate hook
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const [authUser, setAuthUser] = useAuth(); // Get auth context
 
     function handleForm(e) {
         e.preventDefault();
+        setIsLoading(true);
 
         const userInfo = {
             email,
@@ -24,9 +27,15 @@ function Login() {
         .then((res) => {
             if (res.data.success) {
                 toast.success("Signed in successfully");
+                
+                // Update localStorage
                 localStorage.setItem("Users", JSON.stringify(res.data.user));
-                // Navigate to home page after successful login
-                navigate("/");
+                
+                // 🔥 IMPORTANT: Update context state immediately
+                setAuthUser(res.data.user);
+                
+                // Navigate to books page after successful login
+                navigate("/books");
             } else {
                 toast.error("Login failed!");
             }
@@ -34,6 +43,9 @@ function Login() {
         .catch((error) => {
             console.error("❌ Login error:", error.response?.data || error.message);
             toast.error("Login failed: " + (error.response?.data?.message || "Unknown error"));
+        })
+        .finally(() => {
+            setIsLoading(false);
         });
     }
 
@@ -58,6 +70,7 @@ function Login() {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    disabled={isLoading}
                                 />
                             </div>
                             <div className="form-control mt-4">
@@ -73,11 +86,16 @@ function Login() {
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    disabled={isLoading}
                                 />
                             </div>
                             <div className="form-control mt-6">
-                                <button type="submit" className="btn btn-primary">
-                                    Sign in
+                                <button 
+                                    type="submit" 
+                                    className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Signing in...' : 'Sign in'}
                                 </button>
                             </div>
                         </form>

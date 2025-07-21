@@ -91,19 +91,7 @@ function Navbar() {
       <div className="navbar-end flex items-center gap-2">
         {/* Desktop Search */}
         <div className="hidden md:flex">
-          <div className="input-group input-group-sm">
-            <input
-              type="text"
-              placeholder="Search books..."
-              className="input input-bordered input-sm w-40 lg:w-60"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            />
-            <button className="btn btn-sm btn-primary" onClick={handleSearch}>
-              🔍
-            </button>
-          </div>
+          
         </div>
 
         {/* Login / Logout */}

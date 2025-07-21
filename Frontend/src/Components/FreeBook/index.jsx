@@ -24,7 +24,7 @@ function FreeBook(){
     const filterData = book.filter((data)=>data.category==="Free");
     
     return(
-        <div>
+        <div className="min-h-[15vh]" >
             <div className="slider-container">
         <div className="flex flex-wrap lg:grid lg:grid-cols-3 lg:grid-rows-2">
         {

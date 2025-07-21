@@ -4,6 +4,8 @@ import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import Navbar from '../../Components/Navbar';
 import axios from 'axios'
+import { AddBook } from '../../../../Backend/controllers/book.controller';
+import AddBooks from '../../Components/AddBooks';
 function Courses(){
     const [book,setBook] = useState([])
     useEffect(()=>{
@@ -23,7 +25,9 @@ function Courses(){
         <div>
             <Navbar/>
             <Header />
-            
+            <AddBooks/>
+
+            {/* <AddBook /> */}
             <div className='flex flex-wrap lg:grid lg:grid-cols-3 lg:grid-rows-2'>
                 {
                     book.map((listItem)=>{
@@ -33,6 +37,8 @@ function Courses(){
                     })
                 }
             </div>
+                
+
             <Footer />
         </div>
     )
