@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors({
-  origin: 'https://bookish-pi.vercel.app/login',   
+  origin: 'https://bookish-pi.vercel.app',   
   credentials: true                  
 }));
 
