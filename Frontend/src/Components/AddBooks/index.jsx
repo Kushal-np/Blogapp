@@ -45,10 +45,10 @@ function AddBooks() {
   async function fetchBooks() {
     setLoadingBooks(true);
     try {
-      const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBook", {
+      const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBooks", {
         withCredentials: true,
       });
-      setBooks(res.data);
+      setBooks(res.data.book);
     } catch (error) {
       toast.error("Failed to load books");
       console.error(error.response?.data || error.message);
