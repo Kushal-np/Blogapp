@@ -9,7 +9,7 @@ function Header() {
 
         {/* Description */}
         <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
-          Discover timeless classics and modern bestsellers — all in one place.
+          Discover timeless classics and modern bestsellers , all in one place.
           Start your reading journey with handpicked selections curated for thinkers and dreamers.
         </p>
 
