@@ -10,6 +10,7 @@ function FreeBook() {
     const getBooks = async () => {
       try {
         const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBook");
+        console.log("data fetched")
         const freeBooks = (res.data.book || []).filter(book => book.category === "Free");
         setBooks(freeBooks);
       } catch (error) {
