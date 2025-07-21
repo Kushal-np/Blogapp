@@ -3,134 +3,206 @@ import AuthNavbar from "../AuthNavbar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useAuth } from "../../context/AuthProvider"; // Import useAuth
+import { useAuth } from "../../context/AuthProvider";
 
 function Signup() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
-    const [authUser, setAuthUser] = useAuth(); // Get auth context
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const [authUser, setAuthUser] = useAuth();
 
-    function handleForm(e) {
-        e.preventDefault();
-        setIsLoading(true);
+  function handleForm(e) {
+    e.preventDefault();
+    setIsLoading(true);
 
-        const userInfo = {
-            username,
-            email,
-            password
-        };
+    const userInfo = { username, email, password };
 
-        axios.post("http://localhost:8003/api/v1/auth/register", userInfo, {
-            withCredentials: true,
-        })
-        .then((res) => {
-            console.log(res.data);
-            if(res.data && res.data.success) {
-                toast.success("Signed up successfully");
-                
-                // If the API returns user data after signup, you can auto-login
-                // Otherwise, just navigate to login
-                if(res.data.user) {
-                    // Auto-login after successful signup
-                    localStorage.setItem("Users", JSON.stringify(res.data.user));
-                    setAuthUser(res.data.user);
-                    navigate("/books");
-                } else {
-                    // Navigate to login page after successful signup
-                    navigate("/login");
-                }
-            }
-        })
-        .catch((error) => {
-            console.error("❌ Registration error:", error.response?.data || error.message);
-            toast.error("Error while registering: " + (error.response?.data?.message || "Unknown error"));
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
-    }
+    axios.post("http://localhost:8003/api/v1/auth/register", userInfo, {
+      withCredentials: true,
+    })
+      .then((res) => {
+        if (res.data && res.data.success) {
+          toast.success("Signed up successfully");
 
-    return (
-        <div>
-            <AuthNavbar />
-            <div className="min-h-screen flex justify-center items-center">
-                <div className="card w-96 bg-base-100 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title text-center mb-4">Sign Up</h2>
-                        <form onSubmit={handleForm}>
-                            <div className="form-control">
-                                <label className="label" htmlFor="username">
-                                    <span className="label-text">Username</span>
-                                </label>
-                                <input 
-                                    type="text" 
-                                    name="username" 
-                                    id="username"
-                                    placeholder="Enter your username here" 
-                                    className="input input-bordered w-full"
-                                    required
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    disabled={isLoading}
-                                />
-                            </div>
-                            <div className="form-control mt-4">
-                                <label className="label" htmlFor="email">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    id="email"
-                                    placeholder="Enter your email here" 
-                                    className="input input-bordered w-full"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    disabled={isLoading}
-                                />
-                            </div>
-                            <div className="form-control mt-4">
-                                <label className="label" htmlFor="password">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    id="password"
-                                    placeholder="Enter your password" 
-                                    className="input input-bordered w-full"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    disabled={isLoading}
-                                />
-                            </div>
-                            <div className="form-control mt-6">
-                                <button 
-                                    type="submit" 
-                                    className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
-                                    disabled={isLoading}
-                                >
-                                    {isLoading ? 'Signing up...' : 'Sign up'}
-                                </button>
-                            </div>
-                        </form>
-                        <div className="divider"></div>
-                        <p className="text-center text-sm">
-                            Already have an account? 
-                            <Link to="/login" className="link link-primary ml-1">
-                                Sign In
-                            </Link>
-                        </p>
-                    </div>
-                </div>   
+          if (res.data.user) {
+            localStorage.setItem("Users", JSON.stringify(res.data.user));
+            setAuthUser(res.data.user);
+            navigate("/books");
+          } else {
+            navigate("/login");
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("❌ Registration error:", error.response?.data || error.message);
+        toast.error("Error while registering: " + (error.response?.data?.message || "Unknown error"));
+      })
+      .finally(() => setIsLoading(false));
+  }
+
+  return (
+    <div>
+      <AuthNavbar />
+      <div
+        className="
+          min-h-screen flex justify-center items-center
+          bg-gradient-to-tr from-black via-gray-800 to-gray-900
+          px-4
+        "
+      >
+        <div
+          className="
+            w-full max-w-md
+            bg-gradient-to-br from-gray-900 to-gray-800
+            rounded-3xl
+            shadow-lg shadow-black/80
+            border border-gray-700
+            p-10
+            backdrop-blur-sm
+          "
+          style={{
+            background:
+              "linear-gradient(145deg, #000000, #1a1a1a, #0d0d0d)",
+          }}
+        >
+          <h2 className="text-center text-3xl font-extrabold mb-8 text-white drop-shadow-md">
+            Sign Up
+          </h2>
+          <form onSubmit={handleForm} className="space-y-6">
+            <div>
+              <label
+                htmlFor="username"
+                className="block text-sm font-semibold text-gray-300 mb-2"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                className="
+                  w-full
+                  rounded-xl
+                  bg-black
+                  border border-gray-600
+                  text-white
+                  placeholder-gray-500
+                  px-4 py-3
+                  focus:outline-none focus:ring-2 focus:ring-white
+                  focus:border-white
+                  transition
+                  disabled:opacity-60 disabled:cursor-not-allowed
+                  shadow-inner
+                "
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                disabled={isLoading}
+              />
             </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-gray-300 mb-2"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                className="
+                  w-full
+                  rounded-xl
+                  bg-black
+                  border border-gray-600
+                  text-white
+                  placeholder-gray-500
+                  px-4 py-3
+                  focus:outline-none focus:ring-2 focus:ring-white
+                  focus:border-white
+                  transition
+                  disabled:opacity-60 disabled:cursor-not-allowed
+                  shadow-inner
+                "
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-semibold text-gray-300 mb-2"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                className="
+                  w-full
+                  rounded-xl
+                  bg-black
+                  border border-gray-600
+                  text-white
+                  placeholder-gray-500
+                  px-4 py-3
+                  focus:outline-none focus:ring-2 focus:ring-white
+                  focus:border-white
+                  transition
+                  disabled:opacity-60 disabled:cursor-not-allowed
+                  shadow-inner
+                "
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`
+                w-full
+                rounded-xl
+                bg-gradient-to-r from-white/90 to-gray-300
+                text-black font-semibold
+                py-3
+                shadow-md shadow-white/50
+                hover:from-white hover:to-gray-200
+                transition
+                disabled:opacity-60 disabled:cursor-not-allowed
+                ${isLoading ? "loading" : ""}
+              `}
+            >
+              {isLoading ? "Signing up..." : "Sign Up"}
+            </button>
+          </form>
+
+          <p className="mt-8 text-center text-gray-400">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-white hover:text-gray-300 font-semibold transition"
+            >
+              Sign In
+            </Link>
+          </p>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Signup;

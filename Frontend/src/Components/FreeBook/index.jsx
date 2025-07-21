@@ -1,44 +1,54 @@
-import { useEffect } from "react";
-import list from "../../../public/list.json"
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Card from "../CardComponent";
-import axios from 'axios'
-import { useState } from "react";
-function FreeBook(){
-    const [book,setBookState] = useState([])
-    useEffect(()=>{
-        const getBook = async() =>{
-            try{
-                const res = await axios.get("http://localhost:8003/api/v1/book/getBook")
-                setBookState(res.data.book)
-            }
-            catch(error){
-                console.log(error)
-            }
-        }
-        getBook()
-    },[])
 
+function FreeBook() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const res = await axios.get("http://localhost:8003/api/v1/book/getBook");
+        const freeBooks = (res.data.book || []).filter(book => book.category === "Free");
+        setBooks(freeBooks);
+      } catch (error) {
+        console.error("Failed to fetch books:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getBooks();
+  }, []);
 
-
-    const filterData = book.filter((data)=>data.category==="Free");
-    
-    return(
-        <div className="min-h-[15vh]" >
-            <div className="slider-container">
-        <div className="flex flex-wrap lg:grid lg:grid-cols-3 lg:grid-rows-2">
-        {
-            filterData.map((listItem)=>{
-                return(
-                    <Card key={listItem._id} name={listItem.name} title={listItem.title} price={listItem.price} category={listItem.category} image={listItem.image} />
-                )
-            })
-
-            
-        }
+  return (
+    <div className="min-h-screen bg-black text-white px-4">
+      <div className="max-w-7xl mx-auto py-20">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+            Explore Free Books
+          </h1>
+          <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
+            Handpicked selection of timeless books available at no cost.
+          </p>
         </div>
+
+        {/* Content */}
+        {loading ? (
+          <p className="text-gray-500 text-center text-lg py-16">Loading books...</p>
+        ) : books.length === 0 ? (
+          <p className="text-gray-500 text-center text-lg py-16">No free books available right now.</p>
+        ) : (
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {books.map((book, idx) => (
+              <Card key={idx} {...book} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
-        </div>
-    )
+  );
 }
+
 export default FreeBook;

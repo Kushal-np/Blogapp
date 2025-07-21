@@ -1,42 +1,30 @@
 function Header() {
   return (
-    <div className="hero min-h-screen bg-gradient-to-br from-primary/10 via-base-100 to-accent/10">
-      <div className="hero-content text-center max-w-6xl px-4">
-        <div className="space-y-8">
-          {/* Main Heading */}
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-base-content">
-              Welcome to the{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                Book Store
-              </span>
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-base-content/70 max-w-3xl mx-auto leading-relaxed">
-              Discover thousands of amazing books, from timeless classics to modern bestsellers. 
-              Your next great read is just a click away. Dive into worlds of adventure, 
-              knowledge, and imagination.
-            </p>
-          </div>
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
+      <div className="max-w-5xl text-center space-y-10 py-20">
+        {/* Title */}
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+          Welcome to the <span className="border-b-4 border-white pb-1">Book Store</span>
+        </h1>
 
-          {/* Stats Section */}
-          
+        {/* Description */}
+        <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+          Discover timeless classics and modern bestsellers — all in one place.
+          Start your reading journey with handpicked selections curated for thinkers and dreamers.
+        </p>
 
-          {/* Call to Action Buttons */}
-          
-
-          {/* Feature Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mt-8">
-            <div className="badge badge-lg badge-primary badge-outline">📚 Fiction</div>
-            <div className="badge badge-lg badge-secondary badge-outline">🔬 Science</div>
-            <div className="badge badge-lg badge-accent badge-outline">💼 Business</div>
-            <div className="badge badge-lg badge-neutral badge-outline">🎨 Arts</div>
-            <div className="badge badge-lg badge-info badge-outline">💻 Technology</div>
-          </div>
+        {/* Categories (Feature Pills) */}
+        <div className="flex flex-wrap justify-center gap-3 pt-4">
+          {["📚 Fiction", "🔬 Science", "💼 Business", "🎨 Arts", "💻 Technology"].map((label, i) => (
+            <span
+              key={i}
+              className="px-4 py-2 border border-white/20 text-sm text-white rounded-full hover:border-white/40 transition duration-200"
+            >
+              {label}
+            </span>
+          ))}
         </div>
       </div>
-      
-      {/* Floating Elements */}
-      
     </div>
   );
 }

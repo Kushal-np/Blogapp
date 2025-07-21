@@ -3,41 +3,37 @@ import { useAuth } from "../../context/AuthProvider";
 import toast from "react-hot-toast";
 
 function Logout() {
-    const [authUser, setAuthUser] = useAuth();
-    const navigate = useNavigate();
+  const [authUser, setAuthUser] = useAuth();
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-        // Clear localStorage
-        localStorage.removeItem("Users");
-        
-        // 🔥 IMPORTANT: Update context state immediately
-        setAuthUser(null);
-        
-        // Show success message
-        toast.success("Logged out successfully");
-        
-        // Navigate to home page
-        navigate("/");
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("Users");
+    setAuthUser(null);
+    toast.success("Logged out successfully");
+    navigate("/");
+  };
 
-    return (
-        <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                    <span className="text-primary-content text-sm font-bold">
-                        {authUser?.username?.charAt(0) || authUser?.email?.charAt(0) || "U"}
-                    </span>
-                </div>
-            </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-300">
-                
-                    <button onClick={handleLogout} className="text-error">
-                        Logout
-                    </button>
-               
-            </ul>
-        </div>
-    );
+  return (
+    <div className="dropdown dropdown-end">
+      {/* Logout button styled to match Sign in button */}
+     
+
+      {/* Dropdown menu */}
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content mt-2 p-2 shadow-xl bg-black/95 backdrop-blur-xl rounded-xl w-32 border border-white/20"
+      >
+        <li>
+          <button
+            onClick={handleLogout}
+            className="text-white hover:text-red-400 font-semibold w-full text-left hover:bg-white/10 rounded-lg transition-all duration-200"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
 }
 
 export default Logout;

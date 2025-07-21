@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Navbar from "../Navbar"; // Adjust path as needed
 
 function AddBooks() {
   const [showForm, setShowForm] = useState(false);
@@ -23,7 +22,6 @@ function AddBooks() {
   function formHandler() {
     setShowForm(!showForm);
     if (showForm) {
-      // Reset form when closing
       setFormData({
         name: "",
         price: "",
@@ -53,9 +51,7 @@ function AddBooks() {
       );
       
       toast.success("Book added successfully!");
-      console.log(response);
       
-      // Reset form and close
       setFormData({
         name: "",
         price: "",
@@ -74,262 +70,264 @@ function AddBooks() {
   }
 
   return (
-    <div>
-      
-      <div className="min-h-[70vh] bg-gradient-to-br from-base-200 via-base-100 to-base-200">
-        <div className="container mx-auto px-4 py-12">
-          {!showForm ? (
-            // Sophisticated Landing State
-            <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
-                  <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+    <div className="min-h-[70vh] bg-black text-white">
+      <div className="container mx-auto px-6 py-16 max-w-4xl">
+        {!showForm ? (
+          <div className="text-center max-w-xl mx-auto space-y-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border-2 border-white mb-6">
+              <svg
+                className="w-10 h-10 stroke-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+            </div>
+            <h1 className="text-4xl font-extrabold tracking-tight">
+              Expand Your Library
+            </h1>
+            <p className="text-gray-300 leading-relaxed">
+              Share knowledge with the community by adding your favorite books to our collection.
+            </p>
+            <button
+              onClick={formHandler}
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-white px-6 py-3 font-semibold transition-transform duration-200 hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+              aria-label="Add New Book"
+            >
+              <svg
+                className="w-5 h-5 stroke-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+              </svg>
+              Add New Book
+            </button>
+          </div>
+        ) : (
+          <div className="max-w-xl mx-auto">
+            <button
+              onClick={formHandler}
+              className="flex items-center gap-1 text-gray-400 mb-6 hover:text-white focus:outline-none focus:ring-2 focus:ring-white rounded transition"
+            >
+              <svg
+                className="w-4 h-4 stroke-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Back
+            </button>
+            <h2 className="text-3xl font-bold mb-2">Add New Book</h2>
+            <p className="text-gray-400 mb-8">
+              Fill in the details below to add a book to the collection.
+            </p>
+
+            <form onSubmit={handler} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="title" className="block text-sm font-semibold mb-1">
+                    Book Title <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="title"
+                    type="text"
+                    required
+                    value={formData.title}
+                    onChange={(e) => handleInputChange("title", e.target.value)}
+                    className="w-full rounded-md border border-white/50 bg-black px-4 py-2 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
+                    placeholder="Enter the book title"
+                  />
                 </div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
-                  Expand Your Library
-                </h1>
-                <p className="text-lg text-base-content/70 mb-8 leading-relaxed">
-                  Share knowledge with the community by adding your favorite books to our collection.
+
+                <div>
+                  <label htmlFor="name" className="block text-sm font-semibold mb-1">
+                    Author Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    className="w-full rounded-md border border-white/50 bg-black px-4 py-2 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
+                    placeholder="Enter the author's name"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="category" className="block text-sm font-semibold mb-1">
+                    Category <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="category"
+                    required
+                    value={formData.category}
+                    onChange={(e) => handleInputChange("category", e.target.value)}
+                    className="w-full rounded-md border border-white/50 bg-black px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
+                  >
+                    <option className="text-black" value="">
+                      Select a category
+                    </option>
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat} className="text-black">
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="price" className="block text-sm font-semibold mb-1">
+                    Price <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                    <input
+                      id="price"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required
+                      value={formData.price}
+                      onChange={(e) => handleInputChange("price", e.target.value)}
+                      placeholder="0.00"
+                      className="w-full rounded-md border border-white/50 bg-black pl-8 py-2 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="image" className="block text-sm font-semibold mb-1">
+                  Book Cover Image URL <span className="text-gray-500 text-xs">(Optional)</span>
+                </label>
+                <input
+                  id="image"
+                  type="url"
+                  placeholder="https://example.com/book-cover.jpg"
+                  value={formData.image}
+                  onChange={(e) => handleInputChange("image", e.target.value)}
+                  className="w-full rounded-md border border-white/50 bg-black px-4 py-2 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Provide a direct link to the book cover image
                 </p>
               </div>
 
-              <div className="card bg-base-100 shadow-2xl border border-base-300/50 backdrop-blur-sm">
-                <div className="card-body p-8">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="text-center">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                        </svg>
-                      </div>
-                      <h3 className="font-semibold text-base-content">Curated Quality</h3>
-                      <p className="text-sm text-base-content/60">Add books you love and recommend</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mx-auto mb-3">
-                        <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                      </div>
-                      <h3 className="font-semibold text-base-content">Community Driven</h3>
-                      <p className="text-sm text-base-content/60">Help others discover great reads</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                        <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      </div>
-                      <h3 className="font-semibold text-base-content">Instant Access</h3>
-                      <p className="text-sm text-base-content/60">Quick and easy submission process</p>
-                    </div>
-                  </div>
-
-                  <div className="text-center">
-                    <button 
-                      onClick={formHandler}
-                      className="btn btn-primary btn-lg gap-2 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                      </svg>
-                      Add New Book
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            // Sophisticated Form State
-            <div className="max-w-4xl mx-auto">
-              <div className="mb-8">
-                <button 
-                  onClick={formHandler}
-                  className="btn btn-ghost btn-sm gap-2 mb-4 hover:bg-base-200"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                  </svg>
-                  Back
-                </button>
-                <h1 className="text-3xl font-bold text-base-content mb-2">Add New Book</h1>
-                <p className="text-base-content/70">Fill in the details below to add a book to the collection</p>
-              </div>
-
-              <div className="card bg-base-100 shadow-2xl border border-base-300/50">
-                <div className="card-body p-8">
-                  <form onSubmit={handler} className="space-y-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {/* Book Title */}
-                      <div className="form-control">
-                        <label className="label">
-                          <span className="label-text font-medium">Book Title</span>
-                          <span className="label-text-alt text-error">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Enter the book title"
-                          className="input input-bordered focus:input-primary transition-colors"
-                          value={formData.title}
-                          onChange={(e) => handleInputChange('title', e.target.value)}
-                          required
+              {(formData.title || formData.name || formData.image) && (
+                <>
+                  <hr className="my-6 border-white/20" />
+                  <div className="max-w-sm mx-auto bg-gray-900 border border-white/30 rounded-lg shadow-sm overflow-hidden">
+                    <figure className="h-48 bg-black flex items-center justify-center">
+                      {formData.image ? (
+                        <img
+                          src={formData.image}
+                          alt="Book cover preview"
+                          className="object-contain max-h-full"
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                            e.target.nextSibling.style.display = "flex";
+                          }}
                         />
-                      </div>
-
-                      {/* Author Name */}
-                      <div className="form-control">
-                        <label className="label">
-                          <span className="label-text font-medium">Author Name</span>
-                          <span className="label-text-alt text-error">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Enter the author's name"
-                          className="input input-bordered focus:input-primary transition-colors"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {/* Category */}
-                      <div className="form-control">
-                        <label className="label">
-                          <span className="label-text font-medium">Category</span>
-                          <span className="label-text-alt text-error">*</span>
-                        </label>
-                        <select
-                          className="select select-bordered focus:select-primary transition-colors"
-                          value={formData.category}
-                          onChange={(e) => handleInputChange('category', e.target.value)}
-                          required
+                      ) : null}
+                      <div
+                        className={`w-full h-full flex items-center justify-center text-gray-600 ${
+                          formData.image ? "hidden" : "flex"
+                        }`}
+                      >
+                        <svg
+                          className="w-12 h-12"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
                         >
-                          <option value="">Select a category</option>
-                          {categories.map((cat) => (
-                            <option key={cat} value={cat}>{cat}</option>
-                          ))}
-                        </select>
-                      </div>
-
-                      {/* Price */}
-                      <div className="form-control">
-                        <label className="label">
-                          <span className="label-text font-medium">Price</span>
-                          <span className="label-text-alt text-error">*</span>
-                        </label>
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/60">$</span>
-                          <input
-                            type="number"
-                            placeholder="0.00"
-                            className="input input-bordered focus:input-primary transition-colors pl-8"
-                            min="0"
-                            step="0.01"
-                            value={formData.price}
-                            onChange={(e) => handleInputChange('price', e.target.value)}
-                            required
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
-                        </div>
+                        </svg>
                       </div>
-                    </div>
-
-                    {/* Image URL */}
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text font-medium">Book Cover Image URL</span>
-                        <span className="label-text-alt">Optional</span>
-                      </label>
-                      <input
-                        type="url"
-                        placeholder="https://example.com/book-cover.jpg"
-                        className="input input-bordered focus:input-primary transition-colors"
-                        value={formData.image}
-                        onChange={(e) => handleInputChange('image', e.target.value)}
-                      />
-                      <label className="label">
-                        <span className="label-text-alt text-base-content/60">
-                          Provide a direct link to the book cover image
+                    </figure>
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-white truncate">
+                        {formData.title || "Book Title"}
+                      </h3>
+                      <p className="text-sm text-gray-400 truncate">
+                        by {formData.name || "Author Name"}
+                      </p>
+                      <div className="flex justify-between items-center mt-3">
+                        <span className="inline-block border border-white/50 rounded-full px-3 py-1 text-xs text-white">
+                          {formData.category || "Category"}
                         </span>
-                      </label>
-                    </div>
-
-                    {/* Preview Card */}
-                    {(formData.title || formData.name || formData.image) && (
-                      <div className="divider">Preview</div>
-                    )}
-                    
-                    {(formData.title || formData.name || formData.image) && (
-                      <div className="card bg-base-200 shadow-lg max-w-sm mx-auto">
-                        <figure className="h-48 bg-base-300">
-                          {formData.image ? (
-                            <img 
-                              src={formData.image} 
-                              alt="Book cover preview" 
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'flex';
-                              }}
-                            />
-                          ) : null}
-                          <div className={`w-full h-full flex items-center justify-center ${formData.image ? 'hidden' : 'flex'}`}>
-                            <svg className="w-12 h-12 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                        </figure>
-                        <div className="card-body p-4">
-                          <h3 className="card-title text-sm">{formData.title || 'Book Title'}</h3>
-                          <p className="text-xs text-base-content/70">by {formData.name || 'Author Name'}</p>
-                          <div className="flex justify-between items-center mt-2">
-                            <span className="badge badge-outline">{formData.category || 'Category'}</span>
-                            <span className="font-bold text-primary">${formData.price || '0.00'}</span>
-                          </div>
-                        </div>
+                        <span className="font-bold text-white">
+                          ${formData.price || "0.00"}
+                        </span>
                       </div>
-                    )}
-
-                    {/* Action Buttons */}
-                    <div className="divider"></div>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-end">
-                      <button 
-                        type="button" 
-                        onClick={formHandler}
-                        className="btn btn-ghost"
-                        disabled={isLoading}
-                      >
-                        Cancel
-                      </button>
-                      <button 
-                        type="submit" 
-                        className="btn btn-primary gap-2 min-w-32"
-                        disabled={isLoading}
-                      >
-                        {isLoading ? (
-                          <>
-                            <span className="loading loading-spinner loading-sm"></span>
-                            Adding...
-                          </>
-                        ) : (
-                          <>
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add Book
-                          </>
-                        )}
-                      </button>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </>
+              )}
+
+              <div className="flex justify-end gap-4 mt-8">
+                <button
+                  type="button"
+                  onClick={formHandler}
+                  disabled={isLoading}
+                  className="rounded-md border border-white/50 px-6 py-2 font-semibold text-white hover:bg-white hover:text-black transition-colors disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="rounded-md bg-white px-6 py-2 font-semibold text-black hover:bg-gray-200 disabled:opacity-50 flex items-center gap-2 justify-center transition-colors"
+                >
+                  {isLoading ? (
+                    <>
+                      <svg
+                        className="animate-spin w-5 h-5 text-black"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8H4z"
+                        ></path>
+                      </svg>
+                      Adding...
+                    </>
+                  ) : (
+                    "Add Book"
+                  )}
+                </button>
               </div>
-            </div>
-          )}
-        </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,53 +1,104 @@
 function Card({ name, title, price, category, image }) {
+  const isFree = price === "Free" || price === 0;
+
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 w-full max-w-sm mx-auto group">
-      <figure className="px-4 pt-4">
+    <div
+      className="
+        bg-white dark:bg-black
+        rounded-lg border border-gray-200 dark:border-gray-700
+        shadow-sm hover:shadow-md transition-shadow duration-300
+        max-w-sm mx-auto w-full
+        group
+      "
+    >
+      {/* Image */}
+      <figure className="overflow-hidden rounded-t-lg">
         <img
           src={image}
           alt={title || name}
-          className="rounded-xl w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />
       </figure>
-      <div className="card-body">
-        {/* Author/Name */}
+
+      {/* Content */}
+      <div className="p-5">
+        {/* Author */}
         {name && (
-          <div className="text-sm text-base-content/60 font-medium mb-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1 truncate">
             by {name}
-          </div>
+          </p>
         )}
-        
+
         {/* Title */}
-        <h2 className="card-title text-lg font-bold line-clamp-2">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">
           {title}
         </h2>
-        
-        {/* Category Badge */}
+
+        {/* Category */}
         {category && (
-          <div className="badge badge-outline badge-sm mt-2">{category}</div>
+          <span
+            className="
+              inline-block text-xs font-semibold px-3 py-0.5
+              border border-gray-300 dark:border-gray-600
+              rounded-full text-gray-600 dark:text-gray-400
+              select-none
+            "
+          >
+            {category}
+          </span>
         )}
-        
-        {/* Price */}
-        <div className="flex items-center justify-between mt-4">
-          <div className="text-2xl font-bold text-primary">
-            {price === "Free" || price === 0 ? (
-              <span className="text-success">Free</span>
-            ) : (
-              `$${price}`
-            )}
+
+        {/* Price & Buttons */}
+        <div className="flex items-center justify-between mt-6">
+          <div
+            className={`text-lg font-semibold ${
+              isFree ? "text-green-600 dark:text-green-400" : "text-gray-900 dark:text-gray-100"
+            }`}
+          >
+            {isFree ? "Free" : `$${price}`}
           </div>
-          
-          {/* Action Buttons */}
-          <div className="card-actions">
-            {price === "Free" || price === 0 ? (
-              <button className="btn btn-primary btn-sm">
+
+          <div className="flex gap-2">
+            {isFree ? (
+              <button
+                className="
+                  px-4 py-1 text-sm font-semibold
+                  bg-gray-900 dark:bg-gray-100
+                  text-white dark:text-black
+                  rounded-md
+                  hover:bg-gray-700 dark:hover:bg-gray-300
+                  transition-colors duration-200
+                "
+                aria-label="Read Now"
+              >
                 Read Now
               </button>
             ) : (
               <>
-                <button className="btn btn-ghost btn-sm">
+                <button
+                  className="
+                    px-4 py-1 text-sm font-semibold
+                    bg-transparent border border-gray-300 dark:border-gray-600
+                    text-gray-700 dark:text-gray-300
+                    rounded-md
+                    hover:bg-gray-100 dark:hover:bg-gray-800
+                    transition-colors duration-200
+                  "
+                  aria-label="Preview"
+                >
                   Preview
                 </button>
-                <button className="btn btn-primary btn-sm">
+                <button
+                  className="
+                    px-4 py-1 text-sm font-semibold
+                    bg-gray-900 dark:bg-gray-100
+                    text-white dark:text-black
+                    rounded-md
+                    hover:bg-gray-700 dark:hover:bg-gray-300
+                    transition-colors duration-200
+                  "
+                  aria-label="Buy Now"
+                >
                   Buy Now
                 </button>
               </>
