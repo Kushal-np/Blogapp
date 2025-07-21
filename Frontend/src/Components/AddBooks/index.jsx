@@ -34,9 +34,9 @@ function AddBooks({ onBookAdded }) {
   }
 
   function handleInputChange(field, value) {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   }
 
@@ -45,12 +45,12 @@ function AddBooks({ onBookAdded }) {
     setIsLoading(true);
 
     try {
-      await axios.post(
+      const res = await axios.post(
         "https://bookish-767c.onrender.com/api/v1/book/AddBook",
         formData,
         { withCredentials: true }
       );
-
+      console.log("AddBook response:", res.data);
       toast.success("Book added successfully!");
 
       setFormData({
@@ -62,11 +62,9 @@ function AddBooks({ onBookAdded }) {
       });
       setShowForm(false);
 
-      // Call parent to refresh book list immediately
       if (onBookAdded) {
-        onBookAdded();
+        await onBookAdded();  // await to ensure the book list updates
       }
-
     } catch (error) {
       toast.error("Error while adding the book");
       console.error(error.response?.data || error.message);
