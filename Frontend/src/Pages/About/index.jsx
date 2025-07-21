@@ -50,32 +50,7 @@ export default function AboutPage() {
         </section>
 
         {/* Connect */}
-        <section className="text-center">
-          <h2 className="text-3xl font-bold mb-8">Connect With Us</h2>
-          <div className="flex justify-center gap-6 mb-6">
-            {socialLinks.map(({ icon, href, label }, idx) => (
-              <a
-                key={idx}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  w-12 h-12 flex items-center justify-center rounded-full
-                  border border-white text-white
-                  transition-colors duration-300
-                  hover:bg-white hover:text-black
-                  focus:outline-none focus:ring-2 focus:ring-white
-                "
-              >
-                {React.cloneElement(icon, { className: "w-6 h-6" })}
-              </a>
-            ))}
-          </div>
-          <p className="text-white/70 text-lg max-w-md mx-auto">
-            Follow us for book recommendations and updates!
-          </p>
-        </section>
+        
       </main>
     </div>
   );

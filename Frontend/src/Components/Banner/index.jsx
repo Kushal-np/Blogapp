@@ -4,10 +4,10 @@ function Banner() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="flex flex-col justify-center md:flex md:flex-row lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 text-center md:text-left">
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight transform transition-all duration-500 hover:scale-105">
                 <span className="text-white transition-colors duration-300 hover:text-gray-200 cursor-default">
@@ -15,51 +15,43 @@ function Banner() {
                 </span>
                 <br />
                 <span className="text-gray-400 transition-colors duration-300 hover:text-gray-300 cursor-default">
-                  Next Adventure
+                  New Adventure
                 </span>
               </h1>
               
-              <p className="text-xl text-gray-300 leading-relaxed max-w-lg transform transition-all duration-300 hover:text-gray-200">
-                Welcome to <span className="font-semibold text-white transition-colors duration-200 hover:text-gray-100 cursor-pointer">Bookish</span> — where every page turns into possibility. 
+              <p className="text-xl text-gray-300 leading-relaxed max-w-lg mx-auto md:mx-0 transform transition-all duration-300 hover:text-gray-200">
+                Welcome to <span className="font-semibold text-white transition-colors duration-200 hover:text-gray-100 cursor-pointer">Bookish</span> , where every page turns into possibility. 
                 Explore carefully curated collections that span genres, cultures, and imaginations.
               </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                to="/books"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <button 
                 className="group px-8 py-4 bg-white text-black rounded-2xl font-semibold transition-all duration-300 hover:bg-gray-100 hover:shadow-2xl hover:shadow-white/20 hover:scale-105 text-center backdrop-blur-sm relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative">Browse Books</span>
-              </Link>
+                <span className="relative">
+                  
+                  <Link to="/books">Browse Books</Link>
+                  
+                  
+                  
+                  </span>
+              </button>
               
-              <Link 
-                to="/about"
+              <button 
                 className="group px-8 py-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-2xl font-semibold text-white transition-all duration-300 hover:bg-gray-800/80 hover:border-gray-600 hover:shadow-xl hover:shadow-gray-900/50 hover:scale-105 text-center relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative">Learn More</span>
-              </Link>
+                <span className="relative">
+                  <Link to="/about">Learn More</Link>
+                  </span>
+              </button>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-900">
-              {[
-                { number: "50K+", label: "Books" },
-                { number: "25K+", label: "Readers" },
-                { number: "4.9", label: "Rating" }
-              ].map((stat, index) => (
-                <div 
-                  key={index} 
-                  className="text-center group cursor-pointer transform transition-all duration-300 hover:scale-110"
-                >
-                  <div className="text-2xl font-bold text-white transition-colors duration-200 group-hover:text-gray-200">{stat.number}</div>
-                  <div className="text-sm text-gray-400 transition-colors duration-200 group-hover:text-gray-300">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+
           </div>
 
           {/* Right Image Section */}

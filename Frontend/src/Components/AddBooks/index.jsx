@@ -16,7 +16,7 @@ function AddBooks() {
   const categories = [
     "Fiction", "Non-Fiction", "Mystery", "Romance", "Science Fiction", 
     "Fantasy", "Biography", "History", "Self-Help", "Business", 
-    "Philosophy", "Poetry", "Drama", "Adventure", "Thriller"
+    "Philosophy", "Poetry", "Drama", "Adventure", "Thriller","Information Technology" , "Free"
   ];
 
   function formHandler() {
@@ -45,7 +45,7 @@ function AddBooks() {
     
     try {
       const response = await axios.post(
-        "http://localhost:8003/api/v1/book/AddBook",
+        "https://bookish-767c.onrender.com/api/v1/book/AddBook",
         formData,
         { withCredentials: true }
       );
@@ -175,7 +175,7 @@ function AddBooks() {
                     required
                     value={formData.category}
                     onChange={(e) => handleInputChange("category", e.target.value)}
-                    className="w-full rounded-md border border-white/50 bg-black px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
+                    className="w-full rounded-md border border-white/50 bg-gray px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
                   >
                     <option className="text-black" value="">
                       Select a category

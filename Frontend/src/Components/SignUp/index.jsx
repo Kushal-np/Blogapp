@@ -19,7 +19,7 @@ function Signup() {
 
     const userInfo = { username, email, password };
 
-    axios.post("http://localhost:8003/api/v1/auth/register", userInfo, {
+    axios.post("https://bookish-767c.onrender.comapi/v1/auth/register", userInfo, {
       withCredentials: true,
     })
       .then((res) => {
