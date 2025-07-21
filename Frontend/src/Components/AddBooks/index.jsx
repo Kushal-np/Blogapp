@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -12,10 +12,12 @@ function AddBooks() {
     image: "",
     title: "",
   });
+  const [books, setBooks] = useState([]);
+  const [loadingBooks, setLoadingBooks] = useState(false);
 
   const categories = [
-    "Fiction", "Non-Fiction", "Mystery", "Romance", "Science Fiction", 
-    "Fantasy", "Biography", "History", "Self-Help", "Business", 
+    "Fiction", "Non-Fiction", "Mystery", "Romance", "Science Fiction",
+    "Fantasy", "Biography", "History", "Self-Help", "Business",
     "Philosophy", "Poetry", "Drama", "Adventure", "Thriller","Information Technology" , "Free"
   ];
 
@@ -39,19 +41,40 @@ function AddBooks() {
     }));
   }
 
+  // Fetch books from backend
+  async function fetchBooks() {
+    setLoadingBooks(true);
+    try {
+      const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBooks", {
+        withCredentials: true,
+      });
+      setBooks(res.data);
+    } catch (error) {
+      toast.error("Failed to load books");
+      console.error(error.response?.data || error.message);
+    } finally {
+      setLoadingBooks(false);
+    }
+  }
+
+  // Fetch books on component mount
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
   async function handler(e) {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://bookish-767c.onrender.com/api/v1/book/AddBook",
         formData,
         { withCredentials: true }
       );
-      
+
       toast.success("Book added successfully!");
-      
+
       setFormData({
         name: "",
         price: "",
@@ -60,7 +83,10 @@ function AddBooks() {
         title: "",
       });
       setShowForm(false);
-      
+
+      // Fetch updated list after adding a new book
+      fetchBooks();
+
     } catch (error) {
       toast.error("Error while adding the book");
       console.error(error.response?.data || error.message);
@@ -75,6 +101,7 @@ function AddBooks() {
         {!showForm ? (
           <div className="text-center max-w-xl mx-auto space-y-8">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border-2 border-white mb-6">
+              {/* Add icon SVG */}
               <svg
                 className="w-10 h-10 stroke-white"
                 fill="none"
@@ -110,8 +137,47 @@ function AddBooks() {
               </svg>
               Add New Book
             </button>
+
+            {/* Books List */}
+            <div className="mt-12 text-left">
+              <h2 className="text-2xl font-semibold mb-4">Available Books</h2>
+
+              {loadingBooks ? (
+                <p>Loading books...</p>
+              ) : books.length === 0 ? (
+                <p>No books available yet.</p>
+              ) : (
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {books.map((book) => (
+                    <li
+                      key={book._id || book.id}
+                      className="border border-white/30 rounded-lg p-4 bg-gray-900"
+                    >
+                      {book.image ? (
+                        <img
+                          src={book.image}
+                          alt={`${book.title} cover`}
+                          className="w-full h-48 object-contain mb-4"
+                        />
+                      ) : (
+                        <div className="w-full h-48 flex items-center justify-center bg-gray-700 text-gray-400 mb-4">
+                          No Image
+                        </div>
+                      )}
+                      <h3 className="text-lg font-bold truncate">{book.title}</h3>
+                      <p className="text-gray-400 mb-2 truncate">by {book.name}</p>
+                      <p className="text-sm">
+                        Category: <span className="italic">{book.category}</span>
+                      </p>
+                      <p className="text-sm font-semibold mt-1">${book.price}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         ) : (
+          // Your existing add book form here
           <div className="max-w-xl mx-auto">
             <button
               onClick={formHandler}
@@ -133,6 +199,8 @@ function AddBooks() {
             </p>
 
             <form onSubmit={handler} className="space-y-6">
+              {/* Your existing form inputs */}
+              {/* Title */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="title" className="block text-sm font-semibold mb-1">
@@ -165,6 +233,7 @@ function AddBooks() {
                 </div>
               </div>
 
+              {/* Category and Price */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="category" className="block text-sm font-semibold mb-1">
@@ -209,6 +278,7 @@ function AddBooks() {
                 </div>
               </div>
 
+              {/* Image */}
               <div>
                 <label htmlFor="image" className="block text-sm font-semibold mb-1">
                   Book Cover Image URL <span className="text-gray-500 text-xs">(Optional)</span>
@@ -226,6 +296,7 @@ function AddBooks() {
                 </p>
               </div>
 
+              {/* Preview */}
               {(formData.title || formData.name || formData.image) && (
                 <>
                   <hr className="my-6 border-white/20" />
@@ -282,6 +353,7 @@ function AddBooks() {
                 </>
               )}
 
+              {/* Buttons */}
               <div className="flex justify-end gap-4 mt-8">
                 <button
                   type="button"
