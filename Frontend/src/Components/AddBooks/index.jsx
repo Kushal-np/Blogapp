@@ -45,7 +45,7 @@ function AddBooks() {
   async function fetchBooks() {
     setLoadingBooks(true);
     try {
-      const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBooks", {
+      const res = await axios.get("https://bookish-767c.onrender.com/api/v1/book/getBook", {
         withCredentials: true,
       });
       console.log("Book added to the database")
