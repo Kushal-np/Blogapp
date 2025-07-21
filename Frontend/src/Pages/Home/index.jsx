@@ -1,3 +1,4 @@
+import AddBooks from "../../Components/AddBooks";
 import Banner from "../../Components/Banner";
 import EmailField from "../../Components/EmailField";
 import Footer from "../../Components/Footer";
@@ -15,6 +16,7 @@ function Home(){
       </div>
       <Heading />
       <FreeBook/>
+      <AddBooks />
       <Footer/>
       
     </div>
